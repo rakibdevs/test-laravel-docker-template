@@ -8,30 +8,26 @@ A generic docker environment for Laravel with mySql and Nginx
 
 ## Insstallation
 
-1. Click [Use this template](https://github.com/rakibdevs/laravel-docker/generate)
-2. Clone the repository containing the `docker-compose.yml` file.
-3. Run the following command to build the Docker image:
+## How to Install
 
+- `git clone https://github.com/rakibdevs/test-laravel-docker-template`
+- `cd test-laravel-docker-template`
+
+1. Build Docker Container
 ```bash
 $ docker compose build
 ```
 This command will download all the necessary dependencies and build the Docker image according to the specifications in the Dockerfile.
-4. Once the build is complete, run the following command to start the Docker container: 
+2. Once the build is complete, run the following command to start the Docker container: 
 ```bas
 $ docker-compose up -d
 ```
-5. Run the following command to create a new Laravel project inside a src directory:
-```bash
-$ docker compose exec app composer create-project --prefer-dist laravel/laravel .
-```
-This command will install all the necessary dependencies and create a new Laravel project inside the src directory.
+3. Run the following commands to install necessary composer packages:
+- `docker compose exec php composer install`
+- `cp .env.example .env`
+- `docker compose exec php php artisan key:generate`
 
-6. Run other esential commands -
-```bash
-$ docker compose exec app php artisan storage:link
-$ docker compose exec app chmod -R 777 storage bootstrap/cache
-```
-7. Run the following command to migrate database `docker compose exec php php artisan migrate:refresh`. Before migration please update environment variable for database.
+4. Run the following command to migrate database `docker compose exec php php artisan migrate:refresh`. Before migration please update environment variable for database.
 ```DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
